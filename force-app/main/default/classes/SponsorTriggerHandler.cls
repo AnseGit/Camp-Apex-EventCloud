@@ -16,7 +16,11 @@ public with sharing class SponsorTriggerHandler {
 
             if(sl.CAMPX__ContributionAmount__c != null && sl.CAMPX__ContributionAmount__c != 0){
                 sl.CAMPX__Tier__c = calkSponsorTier(sl);
-            }          
+            }      
+            
+            if(sl.CAMPX__Status__c == 'Accepted' && sl.CAMPX__Event__c == null){
+                sl.CAMPX__Status__c.addError('A Sponsor must be associated with an event before being Accepted.');
+            }
         } 
     }
 
