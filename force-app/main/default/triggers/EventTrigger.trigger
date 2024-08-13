@@ -1,8 +1,12 @@
-trigger EventTrigger on CAMPX__Event__c (before insert) {
+trigger EventTrigger on CAMPX__Event__c (before insert, before update) {
 
     if(Trigger.isBefore){
         if(Trigger.isInsert){
-            EventTriggerHandler.updateEvent(Trigger.New);
+            EventTriggerHandler.insertEvent(Trigger.New);
         }
-    }
+
+        if(Trigger.isUpdate){
+            EventTriggerHandler.updateEvent(Trigger.new, trigger.oldMap);
+        }
+    }      
 }
